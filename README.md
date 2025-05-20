@@ -1,6 +1,12 @@
 # AshSparql
 
-**TODO: Add description**
+An Ash Framework extension that provides a SPARQL data layer for querying RDF data sources.
+
+## Features
+
+- SPARQL query generation from Ash queries
+- Integration with RDF data sources via SPARQL endpoints
+- Support for common SPARQL 1.1 operations
 
 ## Installation
 
@@ -15,8 +21,24 @@ def deps do
 end
 ```
 
+## Usage
+
+```elixir
+defmodule MyApp.Resource do
+  use Ash.Resource,
+    data_layer: AshSparql.DataLayer
+
+  sparql do
+    endpoint "http://dbpedia.org/sparql"
+    # Additional configuration options
+  end
+
+  # Resource configuration
+end
+```
+
+## Documentation
+
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/ash_sparql>.
-
-# ash_sparql
