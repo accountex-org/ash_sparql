@@ -22,10 +22,15 @@ defmodule AshSparql.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ash, "~> 3.0"},
-      {:sparql_client, "~> 0.4"},
+      {:ash, "~> 3.5.9"},
+      {:spark, "~> 2.2.54"},
+      {:mint, "~> 1.5"},
+      {:mint_web_socket, "~> 1.0"},
+      {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.30", only: [:dev, :test], runtime: false},
-      {:igniter, "~> 0.5", only: [:dev, :test]}
+      {:igniter, "~> 0.5", only: [:dev, :test]},
+      {:bypass, "~> 2.1", only: :test},
+      {:mox, "~> 1.1", only: :test}
     ]
   end
 end

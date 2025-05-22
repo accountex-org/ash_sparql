@@ -1,8 +1,8 @@
-# AshRDF SPARQL Data Layer Design Document
+# AshSparql SPARQL Data Layer Design Document
 
 ## 1. Executive Summary
 
-The AshRDF SPARQL Data Layer extension provides seamless integration between the Ash Framework and SPARQL-enabled RDF stores. This design implements a complete Ash Data Layer that connects to SPARQL endpoints, translates Ash queries into SPARQL, and converts results back to Ash resource instances. By leveraging SPARQL's powerful query capabilities, this data layer enables Ash applications to interact with semantic web data, linked open data repositories, and RDF triplestores—unlocking the full potential of knowledge graph technologies within the Ash ecosystem.
+The AshSparql SPARQL Data Layer extension provides seamless integration between the Ash Framework and SPARQL-enabled RDF stores. This design implements a complete Ash Data Layer that connects to SPARQL endpoints, translates Ash queries into SPARQL, and converts results back to Ash resource instances. By leveraging SPARQL's powerful query capabilities, this data layer enables Ash applications to interact with semantic web data, linked open data repositories, and RDF triplestores—unlocking the full potential of knowledge graph technologies within the Ash ecosystem.
 
 This document outlines a comprehensive, phased implementation approach that starts with core SPARQL query functionality and gradually builds more advanced features like transactions, changesets, batch operations, and custom optimizations.
 
@@ -10,42 +10,42 @@ This document outlines a comprehensive, phased implementation approach that star
 
 ### 2.1 Core Components
 
-#### `AshRdf.DataLayer.Sparql`
+#### `AshSparql.DataLayer.Sparql`
 - Primary module implementing the `Ash.DataLayer` behaviour
 - Handles CRUD operations by translating to appropriate SPARQL queries
 - Manages connection configuration and query execution
 
-#### `AshRdf.Sparql.Client`
+#### `AshSparql.Sparql.Client`
 - Abstract behavior defining the client interface
 - Standardizes connection management and query execution
 - Implementations include HTTP and WebSocket clients
 
-#### `AshRdf.Sparql.HttpClient`
+#### `AshSparql.Sparql.HttpClient`
 - Implementation for standard SPARQL HTTP protocol
 - Handles HTTP connections to SPARQL endpoints
 - Manages request/response cycles and authentication
 
-#### `AshRdf.Sparql.WebsocketClient`
+#### `AshSparql.Sparql.WebsocketClient`
 - Implementation for WebSocket-based SPARQL endpoints
 - Handles persistent connections for increased efficiency
 - Supports subscription patterns for real-time data
 
-#### `AshRdf.Sparql.ConnectionPool`
+#### `AshSparql.Sparql.ConnectionPool`
 - Manages a pool of connections to SPARQL endpoints
 - Handles connection lifecycle, timeouts, and retries
 - Provides connection checkout/checkin functionality
 
-#### `AshRdf.Sparql.QueryBuilder`
+#### `AshSparql.Sparql.QueryBuilder`
 - Translates Ash queries into SPARQL syntax
 - Handles filter, sort, pagination, and relationship loading
 - Optimizes queries based on resource metadata
 
-#### `AshRdf.Sparql.ResponseParser`
+#### `AshSparql.Sparql.ResponseParser`
 - Parses SPARQL query results (JSON, XML, CSV formats)
 - Converts SPARQL results to Ash resource instances
 - Handles type conversions and error responses
 
-#### `AshRdf.Dsl.Sections.Sparql`
+#### `AshSparql.Dsl.Sections.Sparql`
 - Extends the Ash DSL with SPARQL-specific configuration
 - Provides options for endpoints, authentication, and query optimization
 - Configures resource-to-RDF mappings
@@ -54,14 +54,14 @@ This document outlines a comprehensive, phased implementation approach that star
 
 1. **Query Execution Flow**:
    - Ash calls Data Layer with query/action request
-   - `AshRdf.DataLayer.Sparql` analyzes the request and passes to `QueryBuilder`
+   - `AshSparql.DataLayer.Sparql` analyzes the request and passes to `QueryBuilder`
    - `QueryBuilder` constructs a SPARQL query
    - Query is executed via `Client` implementation
    - `ResponseParser` converts results to Ash resources
    - Data Layer returns results to Ash
 
 2. **Resource Configuration Flow**:
-   - Resource DSL configuration is processed by `AshRdf.Dsl.Sections.Sparql`
+   - Resource DSL configuration is processed by `AshSparql.Dsl.Sections.Sparql`
    - Configuration is validated and transformed
    - Resulting configuration is stored in resource metadata
    - Data Layer uses this metadata during query/action execution
@@ -75,7 +75,7 @@ This document outlines a comprehensive, phased implementation approach that star
 ## 3. Phased Implementation Plan
 
 ### Phase 1: Core SPARQL Client and Basic Queries (2 weeks)
-- Implement `AshRdf.Sparql.Client` interface
+- Implement `AshSparql.Sparql.Client` interface
 - Create `HttpClient` implementation
 - Build basic `QueryBuilder` for SELECT queries
 - Implement `ResponseParser` for SPARQL JSON results
@@ -85,7 +85,7 @@ This document outlines a comprehensive, phased implementation approach that star
 **Milestone:** Successfully query a public SPARQL endpoint and parse results
 
 ### Phase 2: Complete Data Layer Implementation (3 weeks)
-- Implement full `AshRdf.DataLayer.Sparql` conforming to Ash.DataLayer behaviour
+- Implement full `AshSparql.DataLayer.Sparql` conforming to Ash.DataLayer behaviour
 - Support all CRUD operations (CREATE/INSERT, READ/SELECT, UPDATE, DELETE)
 - Implement connection pooling for efficient query execution
 - Support basic filtering, sorting, and pagination
@@ -106,7 +106,7 @@ This document outlines a comprehensive, phased implementation approach that star
 - Enhance SPARQL DSL section with comprehensive options
 - Implement advanced resource-to-RDF mapping options
 - Add support for custom SPARQL query fragments
-- Integrate with AshRdf ontology components
+- Integrate with AshSparql ontology components
 - Support for custom data types and functions
 
 **Milestone:** Full DSL support with comprehensive mapping options
@@ -222,7 +222,7 @@ This document outlines a comprehensive, phased implementation approach that star
 
 ### 6.2 Guides
 
-- Getting Started with AshRdf SPARQL Data Layer
+- Getting Started with AshSparql SPARQL Data Layer
 - Configuring SPARQL Endpoints and Authentication
 - Resource-to-RDF Mapping Guide
 - Performance Optimization Strategies
